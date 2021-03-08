@@ -1,7 +1,7 @@
 # Project
 package-lock.json
 package.json
-.env
+./.env
 
 # EOF
 node_modules/
