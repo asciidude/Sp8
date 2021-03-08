@@ -31,9 +31,9 @@ client.on('message', message => {
     }
 
     try {
-        cmd.execute(message, args);
+        cmd.execute(message, args, client);
     } catch(e) {
-        message.channel.send('Sorry, there was an issue executing the command.');
+        message.channel.send(`:x: An unexpected error occured: \n \`\`\`bash \n ${e} \n \`\`\``);
         console.log(e);
     }
 });

@@ -8,8 +8,10 @@ module.exports = {
     async execute(message, args, client) {
         const embed = new MessageEmbed()
         .setTitle('Pong! :ping_pong:')
-        .addField('Client Latency', Date.now() - message.createdTimestamp, true)
-        .addField('API Latency', Math.round(client.ws.ping), true)
+        .addField('Client Latency', `${Date.now() - message.createdTimestamp}ms`, true)
+        .addField('API Latency', `${Math.round(client.ws.ping)}ms`, true)
+        .setColor('RED')
+
         message.channel.send(embed);
     }
 }
