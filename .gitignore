@@ -5,5 +5,8 @@ package.json
 # dotenv
 .env
 
+# etc
+devnotes
+
 # EOF
 node_modules/

@@ -15,7 +15,7 @@ db.connect('server', (mongo_client, err) => {
         return;
     }
 
-    console.log(`Successfully connected to database ([IP]:[PORT])`);
+    console.log(`Successfully connected to database (connected on [PORT: ${process.env.PORT}])`);
 
     mongo_client.close();
 });
