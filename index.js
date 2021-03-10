@@ -6,6 +6,21 @@ require('dotenv').config();
 client.commands = new Discord.Collection();
 const cmds = fs.readdirSync('./commands').filter(f => f.endsWith('.js'));
 
+// db
+const MongoClient = require('mongodb');
+const db = new MongoClient.MongoClient();
+db.connect('server', (mongo_client, err) => {
+    if(err) {
+        console.error(err);
+        return;
+    }
+
+    console.log(`Successfully connected to database ([IP]:[PORT])`);
+
+    mongo_client.close();
+});
+
+// client events
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
     client.user.setActivity('you type -help', { type: 'WATCHING' })
@@ -25,10 +40,7 @@ client.on('message', message => {
     const command = args.shift().toLowerCase();
     const cmd = client.commands.get(command) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(command));
 
-    if(!cmd) {
-        message.channel.send('Sorry, but that command is non-existant!');
-        return;
-    }
+    if(!cmd) return;
 
     try {
         cmd.execute(message, args, client);
